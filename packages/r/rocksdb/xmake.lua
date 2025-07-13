@@ -85,10 +85,11 @@ package("rocksdb")
                 table.insert(configs, "-DWITH_MD_LIBRARY=" .. (vs_runtime:startswith("MD") and "ON" or "OFF"))
             end
         end
-        local cxflags = {"-include", "cstdint"}
+        local cxflags = {}
         if package:is_plat("mingw") then
             table.insert(cxflags, "-DMINGW_HAS_SECURE_API")
         end
+        package:set_env("CXXFLAGS", "$CXXFLAGS -include cstdint")
         import("package.tools.cmake").install(package, configs, {cxflags = cxflags})
     end)
 
