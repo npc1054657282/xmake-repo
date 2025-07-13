@@ -89,7 +89,6 @@ package("rocksdb")
         if package:is_plat("mingw") then
             table.insert(cxflags, "-DMINGW_HAS_SECURE_API")
         end
-        
         import("package.tools.cmake").install(package, configs, {cxflags = cxflags})
     end)
 
